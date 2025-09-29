@@ -1,9 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from catalog.models import Product
+
 
 def home(request):
-    return render(request, 'home.html')
+    products = Product.objects.all().order_by('-created_at')[:5]
+    context = {'products': products}
+    print(products)
+    return render(request, 'home.html', context)
 
 
 def contacts(request):
