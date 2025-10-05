@@ -1,0 +1,83 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 9,
+    "fields": {
+        "name": "Рыбалка",
+        "description": "Всё, что нужно для рыбалки и активного отдыха"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 10,
+    "fields": {
+        "name": "Туризм",
+        "description": "Всё, что нужно для туризма"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 24,
+    "fields": {
+        "name": "Блесна янтарь",
+        "description": "Яркая блесна на некрупного хищника",
+        "image": "",
+        "category": 9,
+        "price": 220,
+        "created_at": "2025-09-29",
+        "updated_at": "2025-09-29"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 25,
+    "fields": {
+        "name": "Блесна серебро",
+        "description": "Подходит для средней щуки и крупного окуня",
+        "image": "",
+        "category": 9,
+        "price": 350,
+        "created_at": "2025-09-29",
+        "updated_at": "2025-09-29"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 26,
+    "fields": {
+        "name": "Леска",
+        "description": "Высокропрочная леска, выдерживает до 10 килограммов",
+        "image": "",
+        "category": 9,
+        "price": 700,
+        "created_at": "2025-09-29",
+        "updated_at": "2025-09-29"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 27,
+    "fields": {
+        "name": "Дождевик",
+        "description": "Не промокает, защищает одежду от воды",
+        "image": "",
+        "category": 10,
+        "price": 1100,
+        "created_at": "2025-09-29",
+        "updated_at": "2025-09-29"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 28,
+    "fields": {
+        "name": "Рюкзак",
+        "description": "Влагозащитная, непромокаемая ткань, объем 50 литров",
+        "image": "",
+        "category": 10,
+        "price": 5700,
+        "created_at": "2025-09-29",
+        "updated_at": "2025-09-29"
+    }
+}
+]
