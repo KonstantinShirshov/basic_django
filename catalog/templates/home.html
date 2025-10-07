@@ -19,9 +19,9 @@
                 <div class="card-body">
                     <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
                     <h6 class="card-subtitle my-1 mb-2 text-muted">{{ product.category.name }}</h6>
-                    <h1 class="card-title pricing-card-title">$ {{ product.price }}</h1>
+                    <h1 class="card-title pricing-card-title">{{ product.price }} руб.</h1>
                     <p class="card-text">{{ product.description | truncatechars:100 }}</p>
-                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
+                    <a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}" role="button">Открыть</a>
                 </div>
             </div>
         </div>
