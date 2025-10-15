@@ -20,8 +20,7 @@
                     <img src="{{ article.preview | media_filter }}" style="max-width: 100%; height: 200px;">
                 </div>
                 <div class="card-body">
-                    <h1 class="card-title pricing-card-title">{{ article.title }}.</h1>
-                    <h4 class="my-0 font-weight-normal">{{ article.publication_sign }}</h4>
+                    <h1 class="card-title pricing-card-title">{{ article.title }}</h1>
                     <p class="card-text text-start">{{ article.content | truncatechars:100 }}</p>
                     <h5 class="my-0 font-weight-normal">Количество просмотров: {{ article.views_counter }}</h5>
                     <a class="btn btn-primary" href="{% url 'blog:article_detail' article.pk %}"
