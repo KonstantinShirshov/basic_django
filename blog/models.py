@@ -18,12 +18,10 @@ class Article(models.Model):
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Дата создания",
-        help_text="Введите дату создания",
     )
-    publication_sign = models.BooleanField(default=True)
+    is_published = models.BooleanField(default=True)
     views_counter = models.PositiveIntegerField(
         verbose_name="Cчетчик просмотров",
-        help_text="Укажите количество просмотров",
         default=0,
     )
 

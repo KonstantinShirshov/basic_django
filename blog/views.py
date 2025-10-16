@@ -9,7 +9,7 @@ class ArticleListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(publication_sign=True)
+        return queryset.filter(is_published=True)
 
 
 class ArticleDetailView(DetailView):
@@ -25,14 +25,13 @@ class ArticleDetailView(DetailView):
 
 class ArticleCreateView(CreateView):
     model = Article
-    fields = ['title', 'content', 'preview', 'publication_sign']
+    fields = ['title', 'content', 'preview', 'is_published']
     success_url = reverse_lazy('blog:articles_list')
 
 
 class ArticleUpdateView(UpdateView):
     model = Article
-    fields = ['title', 'content', 'preview', 'publication_sign']
-    success_url = reverse_lazy('blog:articles_list')
+    fields = ['title', 'content', 'preview', 'is_published']
 
     def get_success_url(self):
         return reverse('blog:article_detail', args=[self.kwargs.get('pk')])

@@ -27,13 +27,3 @@ class ContactFormView(FormView):
         name = form.cleaned_data['name']
         # Другие действия с данными формы
         return HttpResponse(f'Спасибо, {name}! Мы с вами свяжемся в ближайшее время.')
-
-
-# def answer(request):
-#     if request.method == "POST":
-#         name = request.POST.get("name")
-#         phone = request.POST.get("phone")
-#         message = request.POST.get("message")
-#
-#         return HttpResponse(f'Спасибо, {name}! Мы с вами свяжемся в ближайшее время.')
-#     return render(request, 'contacts.html')
