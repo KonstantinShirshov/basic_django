@@ -1,30 +1,29 @@
-from django.shortcuts import render, get_object_or_404
+from .forms import ContactForm
 from django.http import HttpResponse
-
+from django.views.generic import ListView, TemplateView, DetailView, FormView
 from catalog.models import Product
 
 
-def home(request):
-    products = Product.objects.all()
-    context = {'products': products}
-    return render(request, 'home.html', context)
+class ProductListView(ListView):
+    model = Product
+    template_name = 'home.html'
 
 
-def contacts(request):
-    return render(request, 'contacts.html')
+class ProductTemplateView(TemplateView):
+    model = Product
+    template_name = 'contacts.html'
 
 
-def answer(request):
-    if request.method == "POST":
-        name = request.POST.get("name")
-        phone = request.POST.get("phone")
-        message = request.POST.get("message")
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'product_detail.html'
 
+
+class ContactFormView(FormView):
+    template_name = 'contacts.html'
+    form_class = ContactForm
+
+    def form_valid(self, form):
+        name = form.cleaned_data['name']
+        # Другие действия с данными формы
         return HttpResponse(f'Спасибо, {name}! Мы с вами свяжемся в ближайшее время.')
-    return render(request, 'contacts.html')
-
-
-def product_detail(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    context = {'product': product}
-    return render(request, 'product_detail.html', context)
