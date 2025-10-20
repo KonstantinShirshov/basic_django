@@ -24,15 +24,13 @@ class Product(models.Model):
     name = models.CharField(
         max_length=150,
         verbose_name="Наименование",
-        help_text="Введите наименование продукта",
     )
     description = models.TextField(
-        verbose_name="Описание", help_text="Введите описание продукта"
+        verbose_name="Описание",
     )
     image = models.ImageField(
         upload_to="images/",
         verbose_name="Изображение",
-        help_text="Загрузите изображение продукта",
         blank=True,
         null=True,
     )
@@ -41,16 +39,14 @@ class Product(models.Model):
         on_delete=models.CASCADE,
         related_name="products",
         verbose_name="Категория",
-        help_text="Введите категорию продукта",
     )
-    price = models.IntegerField(verbose_name="Цена", help_text="Введите цену продукта")
+    price = models.IntegerField(verbose_name="Цена")
     created_at = models.DateField(
-        auto_now_add=True, verbose_name="Дата создания", help_text="Введите дату создания"
+        auto_now_add=True, verbose_name="Дата создания"
     )
     updated_at = models.DateField(
         auto_now=True,
         verbose_name="Дата последнего изменения",
-        help_text="Введите дату последнего изменения",
     )
 
     def __str__(self):
