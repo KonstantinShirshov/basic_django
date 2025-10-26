@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'catalog\base.html' %}
 {% load my_tags %}
 {% block title %}Home{% endblock %}
 
@@ -10,24 +10,22 @@
 
 <div class="container">
     <div class="row text-center">
-        {% for product in object_list %}
         <div class="col-3">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
                     <img src="{{ product.image | media_filter }}" style="max-width: 100%; height: 200px;">
                 </div>
                 <div class="card-body">
-                    <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
-                    <h6 class="card-subtitle my-1 mb-2 text-muted">{{ product.category.name }}</h6>
-                    <h1 class="card-title pricing-card-title">{{ product.price }} руб.</h1>
-                    <p class="card-text">{{ product.description | truncatechars:100 }}</p>
-                    <a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}" role="button">Открыть</a>
+                    <h4 class="my-0 font-weight-normal">Наименование: {{ product.name }}</h4>
+                    <h6 class="card-subtitle my-1 mb-2 text-muted">Категория: {{ product.category.name }}</h6>
+                    <h1 class="card-title pricing-card-title">Цена: {{ product.price }} руб.</h1>
+                    <p class="card-text">Описание: {{ product.description }}</p>
+                    <a class="btn btn-primary" href="{% url 'catalog:product_list' %}" role="button">Назад</a>
                 </div>
             </div>
         </div>
-        {% endfor %}
     </div>
 
-    {% include 'footer.html' %}
+    {% include 'catalog\footer.html' %}
 </div>
 {% endblock %}

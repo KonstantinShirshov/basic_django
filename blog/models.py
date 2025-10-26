@@ -3,10 +3,10 @@ from django.db import models
 
 class Article(models.Model):
     title = models.CharField(
-        max_length=200, verbose_name="Заголовок", help_text="Введите заголовок"
+        max_length=200, verbose_name="Заголовок"
     )
     content = models.TextField(
-        verbose_name="Содержимое", help_text="Введите содержимое"
+        verbose_name="Содержимое"
     )
     preview = models.ImageField(
         upload_to="images/",

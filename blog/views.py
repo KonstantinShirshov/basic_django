@@ -1,5 +1,7 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
+
+from blog.forms import ArticleForm
 from blog.models import Article
 
 
@@ -25,7 +27,7 @@ class ArticleDetailView(DetailView):
 
 class ArticleCreateView(CreateView):
     model = Article
-    fields = ['title', 'content', 'preview', 'is_published']
+    form_class = ArticleForm
     success_url = reverse_lazy('blog:articles_list')
 
 
