@@ -1,0 +1,25 @@
+{% extends 'catalog\base.html' %}
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+        <div class="col-7">
+            <form class="row" method="post" enctype="multipart/form-data">
+                <div class="card">
+                    <div class="body">
+                        <div class="card-body">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-3">
+                            Регистрация
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% include 'catalog\footer.html' %}
+{% endblock %}
