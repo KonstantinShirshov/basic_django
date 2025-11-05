@@ -48,6 +48,7 @@ class Product(models.Model):
         auto_now=True,
         verbose_name="Дата последнего изменения",
     )
+    is_published = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -56,3 +57,6 @@ class Product(models.Model):
         verbose_name = "продукт"
         verbose_name_plural = "продукты"
         ordering = ["name", "price"]
+        permissions = [
+            ("can_unpublish_product", "Can unpublish product"),
+            ]
