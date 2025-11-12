@@ -6,9 +6,11 @@
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4">Отдыхать здорово!</h1>
     <p class="lead">Отдыхать здорово! - это интернет-магазин с товарами для спорта и активного отдыха</p>
+    {% if user.is_authenticated %}
     <p>
-       <a class="btn btn-primary" href="{% url 'catalog:product_create' %}" role="button">Создать продукт</a>
+        <a class="btn btn-primary" href="{% url 'catalog:product_create' %}" role="button">Создать продукт</a>
     </p>
+    {% endif %}
 </div>
 
 <div class="container">
@@ -26,10 +28,26 @@
                     <p class="card-text">{{ product.description | truncatechars:100 }}</p>
                     <a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}"
                        role="button">Открыть</a>
+                    {% if user == product.owner %}
                     <a class="btn btn-primary" href="{% url 'catalog:product_update' product.pk %}"
                        role="button">Редактировать</a>
+                    {% endif %}
+                    {% if perms.catalog.delete_product or user == product.owner %}
                     <a class="btn btn-primary" href="{% url 'catalog:product_delete' product.pk %}"
                        role="button">Удалить</a>
+                    {% endif %}
+                    {% if perms.catalog.can_unpublish_product  %}
+                        <form action="{% url 'catalog:product_unpublish' product.pk %}" method="post">
+                            {% csrf_token %}
+                            <button class='mt-2' type="submit">
+                                {% if product.is_published == True %}
+                                Отменить публикацию
+                                {% else %}
+                                Опубликовать
+                                {% endif %}
+                            </button>
+                        </form>
+                    {% endif %}
                 </div>
             </div>
         </div>
