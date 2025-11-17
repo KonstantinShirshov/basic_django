@@ -9,6 +9,7 @@
     {% if user.is_authenticated %}
     <p>
         <a class="btn btn-primary" href="{% url 'catalog:product_create' %}" role="button">Создать продукт</a>
+        <a class="btn btn-primary" href="{% url 'catalog:product_list' %}" role="button">Назад</a>
     </p>
     {% endif %}
 </div>
@@ -23,8 +24,7 @@
                 </div>
                 <div class="card-body">
                     <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
-                    <a class="btn btn-primary" href="{% url 'catalog:product_category_list' product.category_id %}"
-                       role="button">Категория {{ product.category.name }}</a>
+                    <h6 class="card-subtitle my-1 mb-2 text-muted">{{ product.category.name }}</h6>
                     <h1 class="card-title pricing-card-title">{{ product.price }} руб.</h1>
                     <p class="card-text">{{ product.description | truncatechars:100 }}</p>
                     <a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}"

@@ -1,10 +1,14 @@
+from django.core.cache import cache
 from django.shortcuts import get_object_or_404, redirect
+
+from config.settings import CACHE_ENABLED
 from .forms import ContactForm, ProductForm
 from django.http import HttpResponse, HttpResponseForbidden
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, TemplateView, DetailView, FormView, CreateView, UpdateView, DeleteView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from catalog.models import Product
+from .services import get_category_products
 
 
 class UnpublishProductView(LoginRequiredMixin, View):
@@ -19,15 +23,29 @@ class UnpublishProductView(LoginRequiredMixin, View):
         return HttpResponseForbidden("У вас нет прав для публикации продукта.")
 
 
+class ProductCategoryListView(ListView):
+    model = Product
+    template_name = 'catalog\product_category_list.html'
+
+    def get_queryset(self):
+        category_id = self.kwargs.get('category_id')
+        return get_category_products(category_id)
+
+
 class ProductListView(ListView):
     model = Product
     template_name = 'catalog\home.html'
 
     def get_queryset(self):
-        queryset = Product.objects.filter(is_published=True)
-        if self.request.user.has_perm('catalog.can_unpublish_product'):
-            queryset = Product.objects.all()
-        return queryset
+        if not CACHE_ENABLED:
+            queryset = Product.objects.filter(is_published=True)
+            if self.request.user.has_perm('catalog.can_unpublish_product'):
+                queryset = Product.objects.all()
+            return queryset
+        cache_key = f"product_list_{self.request.user.username}_can_unpublish_{self.request.user.has_perm('catalog.can_unpublish_product')}"
+        products = cache.get_or_set(cache_key, lambda: Product.objects.filter(is_published=True), timeout=300)
+        return products
+
 
 
 class ProductTemplateView(TemplateView):
